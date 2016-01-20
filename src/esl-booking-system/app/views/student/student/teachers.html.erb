@@ -1,0 +1,55 @@
+<%= stylesheet_link_tag 'student/teachers', media: 'all' %>
+<%= stylesheet_link_tag 'student/student', media: 'all' %>
+<%= javascript_include_tag 'student/teachers' %>
+<%= javascript_include_tag '/plugins/bootstrap-datepicker.min' %>
+<%= stylesheet_link_tag '/plugins/bootstrap-datepicker.min' %>
+
+<% content_for :head_title do %>
+    Teachers
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= render :partial => 'search_form' %>
+  </div>
+  <div class="panel-body front-result">
+
+    <%= render :partial => 'teacher_list' %>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+          <td></td>
+          <%
+            shown_dates = Array.new
+          %>
+          <% (0..2).each do |x| %>
+              <%
+                d = (Date.today + x.day)
+
+              %>
+              <th><%= d.strftime(EslBookingSystem::Application::DISPLAY_DATE_FORMAT) %></th>
+          <% end %>
+        </tr>
+        </thead>
+        <tbody>
+            <% (0..23).each do |hour| %>
+                <% [['00','30'],['30','00']].each_with_index do |min,index| %>
+                <tr>
+                  <td><%= hour.to_s+':'+min[0].to_s+ ' - ' + (hour+index).to_s+':'+min[1].to_s %></td>
+                  <% (0..2).each do |x| %>
+                      <td></td>
+                  <% end %>
+                </tr>
+                <% end %>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+
+  </div>
+</div>

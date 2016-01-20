@@ -1,0 +1,56 @@
+Online Booking System
+
+* Using the following software stack: rails, ruby, spec, linux, html,
+  javascript, css, etc..
+* Technology: Bundler(Gemfile), angular.js, booststrap, unicorn, etc..
+
+In this exercise you need to create booking system w/ RoR.
+
+Usecases:
+- Sign up
+- Log in
+- Log out
+- Subscribe
+- Search teacher
+- Book lesson
+- View Booked Lesson
+- Cancel Lesson
+
+Pages to be created:
+- Sign up
+- Log in
+- Subscribe a plan
+- Teacher search / Teacher list pege
+- Incoming lessons page
+
+Database: `esl`
+Tables: `members`, `lessons`, `teachers`, `schedules`, `subscriptions`
+
+Requirements:
+
+- Create sign up page
+- Student can sign up with e.g: Devise, Facebook, Google, Twitter account(Devise is must. Others are optional.)
+- Only logged in Student can see every page (redirect to sign up page if visitor is not registered yet)
+- For first-timer login, the student can only choose one in a subscriptions provided which is(1lesson, 2lessons, 3lessons / day).
+  It can be pop-up modal.
+- The student can book how many lesson depend on his/her subscriptions selected.
+- The student has right to book in advance as long does not exceed the subscribe plan per day.
+- Display List of Teacher's Schedule.
+- Lesson schedule is 24 hours base and each lesson is 30 minutes(e.g schedule: 2016-01-20 11:00:00, 2016-01-20 11:30:00).
+- The student can search teachers by gender, name, nationality, schedule.
+- Teacher list page must have pagination.
+- The student can View incoming lessons(still student can cancel this booked lessons).
+- Create test by rspec for the important business logic.
+
+TODO:
+ create rake task
+
+ > rake seed:seed # generate teachers schedules today
+
+
+Feel free to create Model/Controller like Teacher, Student, Lesson,
+Book, etc… You can create the system whatever you like as long as above
+requirements are met. ref: https://engoo.com/, http://eikaiwa.dmm.com
+
+After your task:
+Use Github as repository then send us the link.
