@@ -13,14 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20160120063738) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "lessons", force: :cascade do |t|
-    t.integer  "schedule_id",     limit: 4
-    t.integer  "student_id",      limit: 4
-    t.integer  "subscription_id", limit: 4
-    t.integer  "lesson_status",   limit: 4
+    t.integer  "schedule_id"
+    t.integer  "student_id"
+    t.integer  "subscription_id"
+    t.integer  "lesson_status"
     t.date     "lesson_date"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "lessons", ["schedule_id"], name: "index_lessons_on_schedule_id", using: :btree
@@ -28,21 +31,21 @@ ActiveRecord::Schema.define(version: 20160120063738) do
   add_index "lessons", ["subscription_id"], name: "index_lessons_on_subscription_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
-    t.integer  "teacher_id",      limit: 4
+    t.integer  "teacher_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "schedule_status", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "schedule_status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "schedules", ["teacher_id"], name: "index_schedules_on_teacher_id", using: :btree
 
   create_table "students", force: :cascade do |t|
-    t.string   "email",              limit: 255, default: "", null: false
-    t.string   "encrypted_password", limit: 255, default: "", null: false
+    t.string   "email",                          default: "", null: false
+    t.string   "encrypted_password",             default: "", null: false
     t.string   "name",               limit: 100,              null: false
-    t.integer  "subscription_id",    limit: 4
+    t.integer  "subscription_id"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
@@ -50,18 +53,18 @@ ActiveRecord::Schema.define(version: 20160120063738) do
   add_index "students", ["email"], name: "index_students_on_email", unique: true, using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "max_daily",  limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.integer  "max_daily"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.boolean  "gender",      limit: 1
-    t.string   "nationality", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name"
+    t.integer  "gender",      limit: 2
+    t.string   "nationality"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_foreign_key "lessons", "schedules"

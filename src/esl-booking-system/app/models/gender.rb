@@ -6,7 +6,7 @@ class Gender
 
   def self.parse_gender(g)
     TYPE.each do |type|
-      if type[0] == (g ? 1 : 0)
+      if type[0] == g
         return type
       end
     end

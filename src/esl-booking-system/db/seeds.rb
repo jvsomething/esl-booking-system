@@ -11,11 +11,10 @@ subscription_ids.push(Subscription.create(name: '2 Lessons per day', max_daily: 
 subscription_ids.push(Subscription.create(name: '3 Lessons per day', max_daily: 3).id)
 
 #create teachers, schedules and students
-country_codes = ISO3166::Country.all.map(&:last)
 
 50.times do |_|
 
-  teacher = Teacher.create(name: Faker::Name.name, gender: [0,1].sample, nationality: country_codes.sample)
+  teacher = Teacher.create(name: Faker::Name.name, gender: [0,1].sample, nationality: Faker::Address.country_code)
   schedule_ids = Array.new
   #create random amount of schedules for teacher
   schedule_count = rand(5...15)
