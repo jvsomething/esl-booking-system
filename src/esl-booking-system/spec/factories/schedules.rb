@@ -1,8 +1,9 @@
 FactoryGirl.define do
 
   factory :schedule do |s|
-    s.start_time { Date.now }
-    s.end_time { Date.now }
+    start_time = Faker::Time.between(DateTime.now - 5, DateTime.now + 5)
+    s.start_time { start_time }
+    s.end_time { start_time + (30/1440.0)  }
     s.schedule_status {[0,1].sample }
     association :teacher, factory: :teacher
   end
