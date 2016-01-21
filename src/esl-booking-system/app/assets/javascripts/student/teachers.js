@@ -20,6 +20,5 @@ $(document).ready(function(){
         $.getScript($('#schedule_path').val()+'?teacher_id='+$this.data('id'), function (_) {
 
         });
-
     });
 });

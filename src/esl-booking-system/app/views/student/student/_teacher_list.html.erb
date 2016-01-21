@@ -7,6 +7,7 @@
               <h4>
                 <%= teacher.name %>
               </h4>
+              <small><%= Gender::parse_gender(teacher.gender)[1] %></small> - <small><%= ISO3166::Country[teacher.nationality].translations[I18n.locale.to_s] %></small>
             </div>
         <% end %>
       </div>

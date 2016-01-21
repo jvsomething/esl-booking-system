@@ -11,12 +11,38 @@ class Student::StudentController < ApplicationController
     if params[:page].present?
       page_num = Integer(params[:page]) rescue 1
     end
-    @teachers = Teacher.all
-    @teachers = @teachers.page(page_num).per(8)
+
+    keyword = params[:name]
+
+    @teachers = Teacher.page(page_num).per(8)
+
+    @teachers = @teachers.where('name LIKE :search', search: "%#{keyword}%") if keyword.to_s.strip.length > 0
+    if params[:gender].present?
+      @teachers = @teachers.where('gender IN (?)',params[:gender])
+    end
+
+    if params[:nationality].present? && params[:nationality][0].to_s.strip.length > 0
+      @teachers = @teachers.where('nationality IN (?)',params[:nationality])
+    end
+
+    if params[:availability].present? && params[:availability].to_i == 1
+      from_date = Date.strptime(params[:'from'],'%B %d, %Y') if params[:'from'].present?
+      to_date = Date.strptime(params[:'to'],'%B %d, %Y') if params[:'to'].present?
+      from_date = from_date || Date.today
+      to_date = to_date || Date.today
+      @teachers = @teachers.joins('inner join schedules on teachers.id = schedules.teacher_id').where('date(start_time) between ? and ? and schedule_status = 0',from_date,to_date).group('teachers.id')
+    end
+
   end
 
   def get_teacher_schedule
     teacher_id = params[:teacher_id]
+
+    @teacher = Teacher.where(:id => teacher_id).first
+    if @teacher.nil?
+      redirect_to teachers_path, :notice => 'Teacher doesn\'t exist' and return
+    end
+
     raw_schedules = Schedule.where('teacher_id = ? and start_time > ? and start_time < ?', teacher_id.to_i,DateTime.now,(DateTime.now + 3.day))
     @hashed_schedules = Hash.new
     raw_schedules.each do |schedule|

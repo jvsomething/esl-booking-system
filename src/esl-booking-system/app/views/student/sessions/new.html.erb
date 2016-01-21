@@ -4,11 +4,11 @@
       <h1>ESL Booking System</h1>
   <% end %>
 </div>
-<!-- % if has_errors? %>
+<% if has_errors? %>
     <div class="alert alert-danger center-div" role="alert">
-      < %= devise_error_messages! %>
+      <%= devise_error_messages! %>
     </div>
-< % end % -->
+<% end %>
 <div class="panel panel-default center-div">
   <div class="panel-heading">
     <h3 class="panel-title">Log in</h3>

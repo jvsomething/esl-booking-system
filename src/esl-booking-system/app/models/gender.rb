@@ -1,13 +1,13 @@
 class Gender
   TYPE = [
-      MALE = [1, 'Male'],
-      FEMALE = [2, 'Female']
+      MALE = [0, 'Male'],
+      FEMALE = [1, 'Female']
   ]
 
-  def self.parse_status(status)
-    TYPE.each do |stat|
-      if stat[0] == status
-        return stat
+  def self.parse_gender(g)
+    TYPE.each do |type|
+      if type[0] == (g ? 1 : 0)
+        return type
       end
     end
   end
