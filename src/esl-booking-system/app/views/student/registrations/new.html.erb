@@ -4,11 +4,13 @@
       <h1>ESL Booking System</h1>
   <% end %>
 </div>
-<!-- % if has_errors? %>
-    <div class="alert alert-danger center-div" role="alert">
-      < %= devise_error_messages! %>
+
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %>
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     </div>
-< % end % -->
+<% end %>
+
 <div class="panel panel-default center-div">
   <div class="panel-heading">
     <h3 class="panel-title">Create account</h3>
