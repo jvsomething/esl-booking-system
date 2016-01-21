@@ -12,40 +12,9 @@
   <div class="panel-heading">
     <%= render :partial => 'search_form' %>
   </div>
-  <div class="panel-body front-result">
-
+  <div class="panel-body">
     <%= render :partial => 'teacher_list' %>
-
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover table-striped">
-        <thead>
-        <tr>
-          <td></td>
-          <%
-            shown_dates = Array.new
-          %>
-          <% (0..2).each do |x| %>
-              <%
-                d = (Date.today + x.day)
-
-              %>
-              <th><%= d.strftime(EslBookingSystem::Application::DISPLAY_DATE_FORMAT) %></th>
-          <% end %>
-        </tr>
-        </thead>
-        <tbody>
-            <% (0..23).each do |hour| %>
-                <% [['00','30'],['30','00']].each_with_index do |min,index| %>
-                <tr>
-                  <td><%= hour.to_s+':'+min[0].to_s+ ' - ' + (hour+index).to_s+':'+min[1].to_s %></td>
-                  <% (0..2).each do |x| %>
-                      <td></td>
-                  <% end %>
-                </tr>
-                <% end %>
-            <% end %>
-        </tbody>
-      </table>
+    <div id="schedule-div">
     </div>
   </div>
 
@@ -53,3 +22,4 @@
 
   </div>
 </div>
+<%= hidden_field_tag :schedule_path , student_student_get_teacher_schedule_path %>

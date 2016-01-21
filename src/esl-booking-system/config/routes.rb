@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   namespace :student do
     namespace :student do
       post 'subscribe', :path => 'subscribe/:id'
+      post 'book_lesson', :path => 'book_lesson/:id'
+      delete 'cancel_lesson', :path => 'cancel_lesson/:id'
+      get 'get_teacher_schedule'
     end
   end
 
