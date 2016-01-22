@@ -6,4 +6,8 @@ RSpec.describe Schedule, type: :model do
     FactoryGirl.create(:schedule).should be_valid
   end
 
+  it 'only accepts 0 or 1 for schedule status' do
+    expect{FactoryGirl.create(:schedule, schedule_status:2)}.to raise_error
+  end
+
 end
