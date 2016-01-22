@@ -97,7 +97,7 @@ class Student::StudentController < ApplicationController
 
   def cancel_lesson
     lesson_id = params[:id].to_i
-    lesson = Lesson.where(:id => lesson_id).first
+    lesson = Lesson.where('id = ? and student_id = ?',lesson_id, current_student.id).first
 
     #validate that lesson exists and still active
     if lesson.nil? || lesson.lesson_status == 0
